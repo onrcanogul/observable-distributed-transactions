@@ -1,12 +1,14 @@
 package com.starter.dtxspring.config;
 
 import com.starter.context.TraceContextFactory;
+import com.starter.dtxspring.client.TraceRestTemplateInterceptor;
 import com.starter.dtxspring.filter.TraceInboundFilter;
 import com.starter.dtxspring.support.TraceContextExtractor;
 import com.starter.factory.SpanIdGenerator;
 import com.starter.factory.TraceIdGenerator;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.client.RestTemplate;
 
 @Configuration
 public class DtxSpringConfiguration {
@@ -39,5 +41,12 @@ public class DtxSpringConfiguration {
             TraceContextExtractor extractor
     ) {
         return new TraceInboundFilter(extractor);
+    }
+
+    @Bean
+    public RestTemplate restTemplate() {
+        RestTemplate restTemplate = new RestTemplate();
+        restTemplate.getInterceptors().add(new TraceRestTemplateInterceptor());
+        return restTemplate;
     }
 }
