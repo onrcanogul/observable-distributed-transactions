@@ -5,10 +5,13 @@ import com.starter.dtxspring.aop.TraceAspect;
 import com.starter.dtxspring.client.TraceRestTemplateInterceptor;
 import com.starter.dtxspring.client.TraceWebClientFilter;
 import com.starter.dtxspring.filter.TraceInboundFilter;
+import com.starter.dtxspring.publisher.TraceEventPublisher;
+import com.starter.dtxspring.publisher.impl.HttpTraceEventPublisher;
 import com.starter.dtxspring.support.SpanLifecycleManager;
 import com.starter.dtxspring.support.TraceContextExtractor;
 import com.starter.factory.SpanIdGenerator;
 import com.starter.factory.TraceIdGenerator;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.client.RestTemplate;
@@ -90,10 +93,20 @@ public class DtxSpringConfiguration {
     }
 
     @Bean
+    public TraceEventPublisher traceEventPublisher(RestTemplate restTemplate) {
+        return new HttpTraceEventPublisher(
+                restTemplate,
+                "http://localhost:9090" // collector endpoint
+        );
+    }
+
+    @Bean
     public TraceAspect traceAspect(
-            SpanLifecycleManager manager
+            SpanLifecycleManager spanManager,
+            TraceEventPublisher publisher,
+            @Value("${spring.application.name}") String serviceName
     ) {
-        return new TraceAspect(manager);
+        return new TraceAspect(spanManager, publisher, serviceName);
     }
 
 }
