@@ -2,6 +2,7 @@ package com.starter.dtxspring.config;
 
 import com.starter.context.TraceContextFactory;
 import com.starter.dtxspring.client.TraceRestTemplateInterceptor;
+import com.starter.dtxspring.client.TraceWebClientFilter;
 import com.starter.dtxspring.filter.TraceInboundFilter;
 import com.starter.dtxspring.support.TraceContextExtractor;
 import com.starter.factory.SpanIdGenerator;
@@ -9,9 +10,13 @@ import com.starter.factory.TraceIdGenerator;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.reactive.function.client.WebClient;
 
 @Configuration
 public class DtxSpringConfiguration {
+
+    // Core trace identity generators
+    // Responsible for generating traceId and spanId values
 
     @Bean
     public TraceIdGenerator traceIdGenerator() {
@@ -23,6 +28,9 @@ public class DtxSpringConfiguration {
         return new SpanIdGenerator();
     }
 
+    // TraceContext factory
+    // Encapsulates rules for creating root and child TraceContext instances
+
     @Bean
     public TraceContextFactory traceContextFactory(
             TraceIdGenerator traceIdGenerator,
@@ -31,10 +39,19 @@ public class DtxSpringConfiguration {
         return new TraceContextFactory(traceIdGenerator, spanIdGenerator);
     }
 
+    // Inbound trace extraction support
+    // Extracts trace information from incoming HTTP requests
+
     @Bean
-    public TraceContextExtractor traceContextExtractor(TraceContextFactory factory) {
+    public TraceContextExtractor traceContextExtractor(
+            TraceContextFactory factory
+    ) {
         return new TraceContextExtractor(factory);
     }
+
+    // Inbound HTTP filter
+    // Initializes TraceContext at the beginning of a request
+    // and clears it at the end of the request lifecycle
 
     @Bean
     public TraceInboundFilter traceInboundFilter(
@@ -43,10 +60,24 @@ public class DtxSpringConfiguration {
         return new TraceInboundFilter(extractor);
     }
 
+    // Outbound HTTP client - RestTemplate
+    // Automatically propagates trace headers for synchronous HTTP calls
+
     @Bean
     public RestTemplate restTemplate() {
         RestTemplate restTemplate = new RestTemplate();
         restTemplate.getInterceptors().add(new TraceRestTemplateInterceptor());
         return restTemplate;
     }
+
+    // Outbound HTTP client - WebClient
+    // Automatically propagates trace headers for reactive HTTP calls
+
+    @Bean
+    public WebClient webClient() {
+        return WebClient.builder()
+                .filter(TraceWebClientFilter.tracePropagation())
+                .build();
+    }
+
 }
