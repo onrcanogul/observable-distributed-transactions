@@ -1,9 +1,11 @@
 package com.starter.dtxspring.config;
 
 import com.starter.context.TraceContextFactory;
+import com.starter.dtxspring.aop.TraceAspect;
 import com.starter.dtxspring.client.TraceRestTemplateInterceptor;
 import com.starter.dtxspring.client.TraceWebClientFilter;
 import com.starter.dtxspring.filter.TraceInboundFilter;
+import com.starter.dtxspring.support.SpanLifecycleManager;
 import com.starter.dtxspring.support.TraceContextExtractor;
 import com.starter.factory.SpanIdGenerator;
 import com.starter.factory.TraceIdGenerator;
@@ -78,6 +80,20 @@ public class DtxSpringConfiguration {
         return WebClient.builder()
                 .filter(TraceWebClientFilter.tracePropagation())
                 .build();
+    }
+
+    @Bean
+    public SpanLifecycleManager spanLifecycleManager(
+            TraceContextFactory factory
+    ) {
+        return new SpanLifecycleManager(factory);
+    }
+
+    @Bean
+    public TraceAspect traceAspect(
+            SpanLifecycleManager manager
+    ) {
+        return new TraceAspect(manager);
     }
 
 }
