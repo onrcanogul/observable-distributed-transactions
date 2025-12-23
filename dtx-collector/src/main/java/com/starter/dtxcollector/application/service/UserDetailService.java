@@ -27,6 +27,5 @@ public class UserDetailService implements UserDetailsService {
                 user.getHashedPassword(),
                 List.of()
         );
-
     }
 }

@@ -6,6 +6,5 @@ import java.util.List;
 
 public interface TraceStepRepository {
     List<TraceStep> findByTraceId(String traceId);
-
     void save(TraceStep traceStep);
 }
