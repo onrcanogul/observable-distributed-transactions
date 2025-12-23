@@ -14,6 +14,8 @@ public class TraceIngestService {
         this.repository = repository;
     }
 
+
+
     @Transactional
     public void save(TraceStep model) {
         repository.save(model);
