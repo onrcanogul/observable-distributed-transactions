@@ -1,6 +1,7 @@
 package com.starter.dtxcollector.presentation.dto;
 
 import java.time.Instant;
+import java.util.UUID;
 
 public record TraceIngestRequest(
         String traceId,
@@ -11,6 +12,7 @@ public record TraceIngestRequest(
         Instant startedAt,
         Instant endedAt,
         String status,
-        String errorMessage
+        String errorMessage,
+        UUID projectId
 ) {
 }

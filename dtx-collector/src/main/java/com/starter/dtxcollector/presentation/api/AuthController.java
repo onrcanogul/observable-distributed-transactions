@@ -1,7 +1,7 @@
 package com.starter.dtxcollector.presentation.api;
 
 import com.starter.dtxcollector.application.dto.AuthResponseDto;
-import com.starter.dtxcollector.application.service.AuthService;
+import com.starter.dtxcollector.application.service.auth.AuthService;
 import com.starter.dtxcollector.presentation.dto.LoginModel;
 import com.starter.dtxcollector.presentation.dto.RegisterModel;
 import org.springframework.http.ResponseEntity;

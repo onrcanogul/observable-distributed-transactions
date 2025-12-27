@@ -1,4 +1,4 @@
-package com.starter.dtxcollector.application.service;
+package com.starter.dtxcollector.application.service.traceIngest;
 
 import com.starter.dtxcollector.domain.model.TraceStep;
 import com.starter.dtxcollector.domain.repository.TraceStepRepository;

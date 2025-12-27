@@ -1,7 +1,7 @@
 package com.starter.dtxcollector.infrastructure.configuration.security;
 
-import com.starter.dtxcollector.application.service.JwtService;
-import com.starter.dtxcollector.application.service.UserDetailService;
+import com.starter.dtxcollector.application.service.jwt.JwtService;
+import com.starter.dtxcollector.application.service.user.UserDetailService;
 import com.starter.dtxcollector.infrastructure.filter.JwtAuthenticationFilter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

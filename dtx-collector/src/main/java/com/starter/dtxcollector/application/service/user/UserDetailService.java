@@ -1,4 +1,4 @@
-package com.starter.dtxcollector.application.service;
+package com.starter.dtxcollector.application.service.user;
 
 import com.starter.dtxcollector.domain.model.User;
 import com.starter.dtxcollector.domain.repository.UserRepository;

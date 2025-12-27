@@ -1,7 +1,7 @@
 package com.starter.dtxcollector.infrastructure.filter;
 
-import com.starter.dtxcollector.application.service.JwtService;
-import com.starter.dtxcollector.application.service.UserDetailService;
+import com.starter.dtxcollector.application.service.jwt.JwtService;
+import com.starter.dtxcollector.application.service.user.UserDetailService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;

@@ -1,4 +1,4 @@
-package com.starter.dtxcollector.application.service;
+package com.starter.dtxcollector.application.service.jwt;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;

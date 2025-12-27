@@ -1,6 +1,6 @@
 package com.starter.dtxcollector.presentation.api;
 
-import com.starter.dtxcollector.application.service.TraceIngestService;
+import com.starter.dtxcollector.application.service.traceIngest.TraceIngestService;
 import com.starter.dtxcollector.domain.model.TraceStep;
 import com.starter.dtxcollector.presentation.dto.TraceIngestRequest;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -20,6 +20,7 @@ public class TraceStepController {
     @PostMapping("/ingest")
     public void ingest(TraceIngestRequest model) {
         TraceStep step = new TraceStep(
+                model.projectId(),
                 model.traceId(),
                 model.spanId(),
                 model.parentSpanId(),

@@ -1,6 +1,8 @@
-package com.starter.dtxcollector.application.service;
+package com.starter.dtxcollector.application.service.auth;
 
 import com.starter.dtxcollector.application.dto.AuthResponseDto;
+import com.starter.dtxcollector.application.service.jwt.JwtService;
+import com.starter.dtxcollector.application.service.user.UserDetailService;
 import com.starter.dtxcollector.domain.model.User;
 import com.starter.dtxcollector.domain.repository.UserRepository;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
