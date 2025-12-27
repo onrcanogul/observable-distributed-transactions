@@ -1,4 +1,4 @@
-package com.starter.dtxcollector.infrastructure.persistence.repository;
+package com.starter.dtxcollector.infrastructure.persistence.repository.user;
 
 import com.starter.dtxcollector.domain.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;

@@ -1,18 +1,22 @@
 package com.starter.dtxcollector.infrastructure.persistence.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import com.starter.dtxcollector.infrastructure.persistence.entity.base.EntityMarker;
+import jakarta.persistence.*;
 
 import java.util.UUID;
 
-@Table(name = "users")
+@Table(name = "users", indexes = {
+        @Index(name = "idx_trace_id", columnList = "username"),
+})
 @Entity
-public class UserEntity {
+public class UserEntity implements EntityMarker {
     @Id
     private UUID id;
+    @Column(name = "username")
     private String username;
+    @Column(name = "email")
     private String email;
+    @Column(name = "hashed_password")
     private String hashedPassword;
 
     public static UserEntity create(String username, String email, String hashedPassword) {

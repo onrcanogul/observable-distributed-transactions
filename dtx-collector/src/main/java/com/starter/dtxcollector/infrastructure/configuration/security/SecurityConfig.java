@@ -1,4 +1,4 @@
-package com.starter.dtxcollector.infrastructure.configuration;
+package com.starter.dtxcollector.infrastructure.configuration.security;
 
 import com.starter.dtxcollector.application.service.JwtService;
 import com.starter.dtxcollector.application.service.UserDetailService;

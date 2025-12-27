@@ -1,11 +1,14 @@
 package com.starter.dtxcollector.domain.model;
 
+import com.starter.dtxcollector.domain.model.base.DomainMarker;
+
 import java.time.Instant;
 
 import java.time.Duration;
 import java.util.Objects;
+import java.util.UUID;
 
-public final class TraceStep {
+public final class TraceStep implements DomainMarker {
 
     private final String traceId;
     private final String spanId;
@@ -16,6 +19,7 @@ public final class TraceStep {
 
     private final Instant startedAt;
     private final Instant endedAt;
+    private final UUID projectId;
 
     private final String status;
     private final String errorMessage;
@@ -26,6 +30,7 @@ public final class TraceStep {
     }
 
     public TraceStep(
+            UUID projectId,
             String traceId,
             String spanId,
             String parentSpanId,
@@ -36,6 +41,7 @@ public final class TraceStep {
             String status,
             String errorMessage
     ) {
+        this.projectId = require(projectId, "projectId");
         this.traceId = require(traceId, "traceId");
         this.spanId = require(spanId, "spanId");
         this.parentSpanId = parentSpanId;
@@ -100,6 +106,10 @@ public final class TraceStep {
 
     public String getErrorMessage() {
         return errorMessage;
+    }
+
+    public UUID getProjectId() {
+        return projectId;
     }
 
     // Helper

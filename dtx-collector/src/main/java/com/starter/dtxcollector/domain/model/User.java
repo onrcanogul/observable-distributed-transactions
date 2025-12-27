@@ -1,8 +1,9 @@
 package com.starter.dtxcollector.domain.model;
 
+import com.starter.dtxcollector.domain.model.base.DomainMarker;
 import java.util.UUID;
 
-public class User {
+public class User implements DomainMarker {
     private UUID id;
     private String username;
     private String email;

@@ -1,6 +1,8 @@
 package com.starter.dtxspring.config;
 
+import com.starter.context.ThreadLocalTraceMetadataContext;
 import com.starter.context.TraceContextFactory;
+import com.starter.context.TraceMetadataContext;
 import com.starter.dtxspring.aop.TraceAspect;
 import com.starter.dtxspring.client.TraceRestTemplateInterceptor;
 import com.starter.dtxspring.client.TraceWebClientFilter;
@@ -107,6 +109,11 @@ public class DtxSpringConfiguration {
             @Value("${spring.application.name}") String serviceName
     ) {
         return new TraceAspect(spanManager, publisher, serviceName);
+    }
+
+    @Bean
+    public TraceMetadataContext traceMetadataContext() {
+        return new ThreadLocalTraceMetadataContext();
     }
 
 }

@@ -1,4 +1,4 @@
-package com.starter.dtxcollector.infrastructure.persistence.repository;
+package com.starter.dtxcollector.infrastructure.persistence.repository.traceStep;
 
 import com.starter.dtxcollector.infrastructure.persistence.entity.TraceStepEntity;
 import org.springframework.data.jpa.repository.JpaRepository;

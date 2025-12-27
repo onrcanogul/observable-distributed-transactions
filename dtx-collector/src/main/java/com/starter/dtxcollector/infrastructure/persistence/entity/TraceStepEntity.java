@@ -1,8 +1,10 @@
 package com.starter.dtxcollector.infrastructure.persistence.entity;
 
+import com.starter.dtxcollector.infrastructure.persistence.entity.base.EntityMarker;
 import jakarta.persistence.*;
 
 import java.time.Instant;
+import java.util.UUID;
 
 @Entity
 @Table(
@@ -14,19 +16,11 @@ import java.time.Instant;
                 @Index(name = "idx_started_at", columnList = "started_at")
         }
 )
-public class TraceStepEntity {
+public class TraceStepEntity implements EntityMarker {
 
-    // ---------------------------------------------------------------------
-    // Surrogate primary key
-    // We do NOT use spanId as PK to allow future flexibility
-    // ---------------------------------------------------------------------
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    // ---------------------------------------------------------------------
-    // Trace identifiers
-    // ---------------------------------------------------------------------
 
     @Column(name = "trace_id", nullable = false, length = 64)
     private String traceId;
@@ -37,9 +31,8 @@ public class TraceStepEntity {
     @Column(name = "parent_span_id", length = 64)
     private String parentSpanId;
 
-    // ---------------------------------------------------------------------
-    // Context information
-    // ---------------------------------------------------------------------
+    @Column(name = "project_id", length = 64)
+    private UUID projectId;
 
     @Column(name = "service_name", nullable = false, length = 128)
     private String serviceName;
@@ -47,9 +40,6 @@ public class TraceStepEntity {
     @Column(name = "operation_name", nullable = false, length = 256)
     private String operationName;
 
-    // ---------------------------------------------------------------------
-    // Timing information
-    // ---------------------------------------------------------------------
 
     @Column(name = "started_at", nullable = false)
     private Instant startedAt;
@@ -57,9 +47,6 @@ public class TraceStepEntity {
     @Column(name = "ended_at", nullable = false)
     private Instant endedAt;
 
-    // ---------------------------------------------------------------------
-    // Execution result
-    // ---------------------------------------------------------------------
 
     @Column(name = "status", nullable = false, length = 16)
     private String status; // OK / ERROR
@@ -67,14 +54,9 @@ public class TraceStepEntity {
     @Column(name = "error_message", columnDefinition = "TEXT")
     private String errorMessage;
 
-    // ---------------------------------------------------------------------
-    // JPA requires a no-arg constructor
-    // ---------------------------------------------------------------------
     protected TraceStepEntity() {
     }
 
-    // Getters (no setters on purpose)
-    // Entity is mutated only via constructor/factory
 
     public Long getId() {
         return id;
@@ -116,9 +98,14 @@ public class TraceStepEntity {
         return errorMessage;
     }
 
+    public UUID getProjectId() {
+        return projectId;
+    }
+
     // Static factory for controlled creation
 
     public static TraceStepEntity of(
+            UUID projectId,
             String traceId,
             String spanId,
             String parentSpanId,
@@ -130,6 +117,7 @@ public class TraceStepEntity {
             String errorMessage
     ) {
         TraceStepEntity entity = new TraceStepEntity();
+        entity.projectId = projectId;
         entity.traceId = traceId;
         entity.spanId = spanId;
         entity.parentSpanId = parentSpanId;

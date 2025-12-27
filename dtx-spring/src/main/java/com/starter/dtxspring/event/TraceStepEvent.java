@@ -1,6 +1,7 @@
 package com.starter.dtxspring.event;
 
 import java.time.Instant;
+import java.util.UUID;
 
 public class TraceStepEvent {
     private String traceId;
@@ -9,6 +10,7 @@ public class TraceStepEvent {
 
     private String serviceName;
     private String operationName;
+    private String principal;
 
     private Instant startedAt;
     private Instant endedAt;
@@ -35,6 +37,8 @@ public class TraceStepEvent {
     public String getOperationName() {
         return operationName;
     }
+
+
 
     public void setOperationName(String operationName) {
         this.operationName = operationName;
