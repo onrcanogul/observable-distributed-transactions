@@ -21,6 +21,15 @@ public class ProjectRepositoryImpl implements ProjectRepository {
     }
 
     @Override
+    public Project findById(UUID id) {
+        return mapper
+                .toDomain(jpaRepository
+                        .findById(id)
+                        .orElseThrow()
+                );
+    }
+
+    @Override
     public List<Project> findByTeamId(UUID teamId) {
         return jpaRepository.findByTeamId(teamId)
                 .stream()

@@ -15,6 +15,10 @@ public class ProjectService {
         this.repository = repository;
     }
 
+    public Project findById(UUID id) {
+        return repository.findById(id);
+    }
+
     public List<Project> findByTeam(UUID teamId) {
         if (teamId == null) throw new RuntimeException();
         return repository.findByTeamId(teamId);

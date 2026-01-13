@@ -18,5 +18,4 @@ public class TraceIngestService {
     public void save(TraceStep model) {
         repository.save(model);
     }
-
 }

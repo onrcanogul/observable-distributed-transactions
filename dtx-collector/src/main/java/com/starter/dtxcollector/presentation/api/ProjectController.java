@@ -18,7 +18,12 @@ public class ProjectController {
         this.service = service;
     }
 
-    @GetMapping("{teamId}")
+    @GetMapping("{id}")
+    public ResponseEntity<Project> findById(@PathVariable UUID id) {
+        return ResponseEntity.ok(service.findById(id));
+    }
+
+    @GetMapping("team/{teamId}")
     public ResponseEntity<List<Project>> findByTeam(@PathVariable UUID teamId) {
         return ResponseEntity.ok(service.findByTeam(teamId));
     }
