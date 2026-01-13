@@ -34,7 +34,7 @@ public class TraceAspect {
 
         MethodSignature signature = (MethodSignature) pjp.getSignature();
 
-        String operationName = traceable.name().isBlank()
+        String operationName = traceable.name().isEmpty()
                 ? signature.getDeclaringType().getSimpleName() + "." + signature.getName()
                 : traceable.name();
 
