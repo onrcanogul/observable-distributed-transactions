@@ -18,7 +18,7 @@ public class TraceContextExtractor {
         String parentSpanId = request.getHeader(TraceHeaders.SPAN_ID);
         String sagaId = request.getHeader(TraceHeaders.SAGA_ID);
 
-        if (traceId == null || traceId.isBlank()) {
+        if (traceId == null || traceId.isEmpty()) {
             return factory.createRoot(sagaId);
         }
 
