@@ -7,9 +7,10 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<parent>
-		<groupId>com.starter</groupId>
-		<artifactId>observable-distributed-transactions</artifactId>
-		<version>0.1.0-SNAPSHOT</version>
+		<groupId>io.github.onrcanogul</groupId>
+		<artifactId>dtx-parent</artifactId>
+		<version>0.1.0</version>
+		<relativePath>../pom.xml</relativePath>
 	</parent>
 
 	<artifactId>dtx-spring</artifactId>
@@ -43,10 +44,11 @@
 
 		<!-- Your Core Module -->
 		<dependency>
-			<groupId>com.starter</groupId>
+			<groupId>io.github.onrcanogul</groupId>
 			<artifactId>dtx-core</artifactId>
-			<version>1.0-SNAPSHOT</version>
+			<version>0.1.0</version>
 		</dependency>
+
 
 		<!-- Dev tools (optional) -->
 		<dependency>

@@ -1,2 +1,5 @@
 .idea
 /.env
+/dtx-spring/target
+/dtx-core/target
+/dtx-collector/target
